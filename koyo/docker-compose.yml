@@ -8,7 +8,7 @@ x-l1_rpc_geth: &l1_rpc_geth
 version: "3.9"
 
 services:
-  dtl:
+  bobabase_dtl:
     container_name: rpc-bobabase-dtl
     build:
       context: ..
@@ -38,7 +38,7 @@ services:
       - "127.0.0.1:${DTL_PORT:-34878}:7878"
       - "127.0.0.1:${REGISTRY_PORT:-34080}:8081"
 
-  replica:
+  bobabase_replica:
     container_name: rpc-bobabase
     depends_on:
       - dtl
@@ -55,8 +55,8 @@ services:
     environment:
       << : *l1_rpc_geth
       ROLLUP_TIMESTAMP_REFRESH: 5s
-      ROLLUP_STATE_DUMP_PATH: http://dtl:8081/state-dump.latest.json
-      ROLLUP_CLIENT_HTTP: http://dtl:7878
+      ROLLUP_STATE_DUMP_PATH: http://bobabase_dtl:8081/state-dump.latest.json
+      ROLLUP_CLIENT_HTTP: http://bobabase_dtl:7878
       ROLLUP_BACKEND: 'l2'
       ROLLUP_VERIFIER_ENABLE: 'true'
       RETRIES: 60

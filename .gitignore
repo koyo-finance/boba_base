@@ -61,3 +61,5 @@ packages/boba/gateway/public/env.js
 env-mainnet.yml
 env-rinkeby.yml
 ops_boba/api/metatransaction-api/yarn.lock
+
+!koyo/.env
